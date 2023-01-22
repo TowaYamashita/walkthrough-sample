@@ -74,7 +74,7 @@ class _WalkthroughPageState extends State<WalkthroughPage> {
                 currentPage: currentPage.stream,
                 onContinued: goNext,
                 onFinished: goHomePage,
-                pageCount: walkthroughs.length,
+                pageAllCount: walkthroughs.length,
               ),
             ],
           ),
@@ -185,7 +185,7 @@ class _Button extends StatelessWidget {
     required this.currentPage,
     required this.onContinued,
     required this.onFinished,
-    required this.pageCount,
+    required this.pageAllCount,
   }) : super(key: key);
 
   /// 現在表示されているページ番号
@@ -198,7 +198,7 @@ class _Button extends StatelessWidget {
   final void Function() onFinished;
 
   /// ウォークスルー全体のページ数
-  final int pageCount;
+  final int pageAllCount;
 
   @override
   Widget build(BuildContext context) {
@@ -206,7 +206,7 @@ class _Button extends StatelessWidget {
       stream: currentPage,
       builder: (_, snapshot) {
         final currentPage = snapshot.data ?? 0;
-        final isLastPage = currentPage == (pageCount - 1);
+        final isLastPage = currentPage == (pageAllCount - 1);
         return ElevatedButton(
           onPressed: isLastPage ? onFinished : onContinued,
           child: Text(
